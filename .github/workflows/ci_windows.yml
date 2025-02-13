@@ -1,4 +1,4 @@
-name: CI Ubuntu
+name: CI Windows
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-    name: py-${{ matrix.pixi_env }}-ubuntu
-    runs-on: ubuntu-latest
+    name: py-${{ matrix.pixi_env }}-win
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -49,5 +49,5 @@ jobs:
           environments: ${{ matrix.pixi_env }}
           cache: true
 
-      - name: Build
+      - name: Build and test PyMomentum
         run: pixi run -e ${{ matrix.pixi_env }} config
