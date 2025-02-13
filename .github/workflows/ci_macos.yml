@@ -1,0 +1,29 @@
+name: CI macOS
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    name: py-${{ matrix.os == 'macos-latest-large' && 'mac-x86_64' || 'mac-arm64' }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, macos-latest-large]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          cache: true
+
+      - name: Build
+        run: pixi run config

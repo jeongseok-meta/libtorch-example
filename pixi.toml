@@ -1,0 +1,12 @@
+[project]
+authors = ["Jeongseok Lee <jeongseok@meta.com>"]
+channels = ["conda-forge"]
+name = "libtorch-example"
+platforms = ["osx-64", "osx-arm64"]
+version = "0.1.0"
+
+[dependencies]
+libtorch = ">=2.5.1,<3"
+
+[tasks]
+config ={ cmd = "cmake -S . -B build" }
