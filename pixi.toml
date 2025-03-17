@@ -14,7 +14,8 @@ pytorch = ">=2.6.0,<3"
 
 [tasks]
 rm-build = { cmd = "rm -rf build" }
-config ={ cmd = "cmake -S . -B build" }
+config = { cmd = "cmake -S . -B build" }
+build = { cmd = "cmake --build build -j", depends-on = ["config"] }
 
 #=========
 # win-64
