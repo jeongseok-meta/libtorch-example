@@ -50,4 +50,4 @@ jobs:
           cache: true
 
       - name: Build
-        run: pixi run -e ${{ matrix.pixi_env }} config
+        run: pixi run -e ${{ matrix.pixi_env }} build
