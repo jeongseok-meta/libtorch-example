@@ -37,6 +37,12 @@ build = { cmd = "cmake --build build/$PIXI_ENVIRONMENT_NAME/cpp -j --config Rele
 ] }
 
 #==============
+# Feature: CPU
+#==============
+
+[feature.cpu]
+
+#==============
 # Feature: GPU
 #==============
 
@@ -52,3 +58,5 @@ dependencies = { python = "3.12.*", pytorch-gpu = ">=2.6.0,<3", cuda-nvtx-dev = 
 
 [environments]
 gpu = ["gpu"]
+cpu = ["cpu"]
+default = ["cpu"]
