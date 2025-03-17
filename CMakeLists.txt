@@ -2,7 +2,12 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(LibTorchExample)
 
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 find_package(pybind11 CONFIG REQUIRED)
+
+if(NOT DEFINED ENV{CONDA_PREFIX})
+  message(FATAL_ERROR "CONDA_PREFIX is not set")
+endif()
 
 set(ENV{NVTOOLSEXT_PATH} "$ENV{CONDA_PREFIX}/include")
 
@@ -28,13 +33,16 @@ add_executable(${target_name} main.cpp)
 target_include_directories(${target_name} PRIVATE
   ${ATEN_INCLUDE_DIR}
   ${TORCH_INCLUDE_DIRS}
+  ${Python3_INCLUDE_DIRS}
 )
 target_link_libraries(${target_name} PRIVATE
   ${ATEN_LIBRARIES}
   ${TORCH_LIBRARIES}
   ${torch_python}
   pybind11::pybind11
+  Python3::Python
 )
 target_compile_options(${target_name} PRIVATE
   ${TORCH_CXX_FLAGS}
 )
+target_compile_features(${target_name} PRIVATE cxx_std_17)
